@@ -1,0 +1,6 @@
+version: '3'
+services:
+  bme280:
+    build: .
+    devices:
+      - "/dev/i2c-1"

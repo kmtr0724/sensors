@@ -1,0 +1,13 @@
+name: Raspberrypi-github-actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  raspberrypi-test:
+    runs-on: [self-hosted, linux, arm]
+    steps:
+      - name: Run a one-line script
+        run: |
+          echo "Hello, world!" > /home/ryu/helloworld.txt
+          pwd

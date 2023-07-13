@@ -1,7 +1,8 @@
 name: Raspberrypi-github-actions
 
 on:
-  workflow_dispatch:
+ push:
+  branches: [ "main" ]
 
 jobs:
   raspberrypi-test:

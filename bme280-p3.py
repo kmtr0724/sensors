@@ -2,6 +2,8 @@
 
 from smbus2 import SMBus
 import time
+import schedule
+
 #from influxdb import InfluxDBClient
 
 bus_number  = 1
@@ -158,6 +160,11 @@ def setup():
 setup()
 get_calib_param()
 
+schedule.every(5).seconds.do(readData) 
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 if __name__ == '__main__':
     try:

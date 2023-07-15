@@ -6,6 +6,8 @@ services:
       - INFLUXDB_SEVER=thp-influxdb
     devices:
       - "/dev/i2c-1"
+    depends_on:
+      - influxdb
     restart: always
   co2:
     build: ./co2/
@@ -13,6 +15,8 @@ services:
       - INFLUXDB_SEVER=thp-influxdb
     devices:
       - "/dev/ttyS0"
+    depends_on:
+      - influxdb
     restart: always
   influxdb:
     image: hypriot/rpi-influxdb

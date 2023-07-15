@@ -1,4 +1,5 @@
 ラスパイのセンサー類スクリプト
-/home/piに置き、crontabで定期実行
+docker compose up -d
+で起動
+事前にi2cとserialを有効化しておく
 
-co2はシリアルコンソールの権限解決のためroot権限が必要

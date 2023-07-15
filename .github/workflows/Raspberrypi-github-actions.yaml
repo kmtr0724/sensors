@@ -8,8 +8,9 @@ jobs:
   raspberrypi-test:
     runs-on: [self-hosted, linux, arm]
     steps:
-      - name: Run a one-line script
+      - name: deploy 
         run: |
-          echo "Hello, world!" > /home/ryu/helloworld.txt
+          echo "Deploy Start"
           pwd
-          whoami >> /home/ryu/helloworld.txt 
+          whoami 
+          echo "Deploy Start"

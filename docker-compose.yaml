@@ -2,14 +2,19 @@ version: '3'
 services:
   bme280:
     build: ./bme280/
+    environment:
+      - INFLUXDB_SEVER=thp-influxdb
     devices:
       - "/dev/i2c-1"
   co2:
     build: ./co2/
+    environment:
+      - INFLUXDB_SEVER=thp-influxdb
     devices:
       - "/dev/ttyS0"
   influxdb:
     image: hypriot/rpi-influxdb
+    container_name: "thp-influxdb"
     ports:
       - 8086:8086
     environment:
@@ -19,7 +24,7 @@ services:
   grafana:
     image: grafana/grafana:7.1.1
     ports:
-      - 8085:3000
+      - 3000:3000
     depends_on:
       - influxdb
     environment:

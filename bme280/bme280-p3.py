@@ -3,8 +3,9 @@
 from smbus2 import SMBus
 import time
 import schedule
-
+import os
 from influxdb import InfluxDBClient
+
 
 bus_number  = 1
 i2c_address = 0x76
@@ -74,7 +75,8 @@ def readData():
     p=compensate_P(pres_raw)
     h=compensate_H(hum_raw)
 
-    client = InfluxDBClient('localhost', 8086, '', '', 'thp')
+    influxdb_server = os.getenv("INFLUXDB_SEVER")
+    client = InfluxDBClient(influxdb_server, 8086, '', '', 'thp')
 
     json_body = [
         {

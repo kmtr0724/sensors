@@ -4,9 +4,11 @@ from influxdb import InfluxDBClient
 import mh_z19
 import time
 import schedule
+import os
 
 def write_to_influxDB(co2_value):
-        client = InfluxDBClient('localhost', 8086, '', '', 'thp')
+        influxdb_server = os.getenv("INFLUXDB_SEVER")
+        client = InfluxDBClient(influxdb_server, 8086, '', '', 'thp')
         json_body = [
             {
                 "measurement": "co2",

@@ -12,3 +12,4 @@ jobs:
         run: |
           echo "Hello, world!" > /home/ryu/helloworld.txt
           pwd
+          whoami >> /home/ryu/helloworld.txt 

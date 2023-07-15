@@ -4,7 +4,7 @@ from smbus2 import SMBus
 import time
 import schedule
 
-#from influxdb import InfluxDBClient
+from influxdb import InfluxDBClient
 
 bus_number  = 1
 i2c_address = 0x76
@@ -74,7 +74,7 @@ def readData():
     p=compensate_P(pres_raw)
     h=compensate_H(hum_raw)
 
-  #  client = InfluxDBClient('localhost', 8086, '', '', 'thp')
+    client = InfluxDBClient('localhost', 8086, '', '', 'thp')
 
     json_body = [
         {
@@ -86,7 +86,7 @@ def readData():
             }
         }
     ]
-  #  client.write_points(json_body)
+    client.write_points(json_body)
 
 
 def compensate_P(adc_P):
@@ -160,19 +160,15 @@ def setup():
 setup()
 get_calib_param()
 
-schedule.every(5).seconds.do(readData) 
+schedule.every(60).seconds.do(readData) 
 
 while True:
     schedule.run_pending()
-    time.sleep(1)
+    time.sleep(5)
 
 if __name__ == '__main__':
     try:
         readData()
     except KeyboardInterrupt:
         pass
-
-
-
-
 

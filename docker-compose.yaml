@@ -1,6 +1,29 @@
 version: '3'
 services:
   bme280:
-    build: .
+    build: ./bme280/
     devices:
       - "/dev/i2c-1"
+  co2:
+    build: ./co2/
+    devices:
+      - "/dev/ttyS0"
+  influxdb:
+    image: hypriot/rpi-influxdb
+    ports:
+      - 8086:8086
+    environment:
+      - PRE_CREATE_DB=thp
+    volumes:
+      - ./influxdb:/data
+  grafana:
+    image: grafana/grafana:7.1.1
+    ports:
+      - 8085:3000
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources

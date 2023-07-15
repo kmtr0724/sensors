@@ -35,8 +35,8 @@ def get_co2_value():
         cnt=cnt+1
         time.sleep(3)    
 
-schedule.every(60).seconds.do(get_co2_value)
+schedule.every(59).seconds.do(get_co2_value)
 
 while True:
     schedule.run_pending()
-    time.sleep(5)
+    time.sleep(1)

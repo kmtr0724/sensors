@@ -166,7 +166,7 @@ schedule.every(60).seconds.do(readData)
 
 while True:
     schedule.run_pending()
-    time.sleep(5)
+    time.sleep(2)
 
 if __name__ == '__main__':
     try:
